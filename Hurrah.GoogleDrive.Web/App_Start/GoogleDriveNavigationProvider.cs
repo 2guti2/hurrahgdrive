@@ -26,6 +26,14 @@ namespace Hurrah.GoogleDrive.Web
                     )
                 ).AddItem(
                     new MenuItemDefinition(
+                        "Drive",
+                        L("drive"),
+                        url: "drive/indexasync",
+                        icon: "folder",
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Users)
+                        )
+                ).AddItem(
+                    new MenuItemDefinition(
                         PageNames.Tenants,
                         L("Tenants"),
                         url: "Tenants",

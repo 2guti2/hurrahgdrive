@@ -28,7 +28,7 @@
     <text name="Surname" value="Tên đệm" />
     <text name="EmailAddress" value="Địa chỉ email" />
 
-    <text name="Tenants" value="Tenants" />
+    <text name="Tenants" value="Tenants" />    
     <text name="SavedSuccessfully" value="Lưu thành công" />
     <text name="CreateNewTenant" value="Tạo mới tenant" />
     <text name="AdminEmailAddress" value="Admin email address" />
