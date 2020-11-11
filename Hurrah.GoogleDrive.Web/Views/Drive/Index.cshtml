@@ -9,7 +9,9 @@
     @Scripts.Render("~/Bundles/home-index")
 }
 <div class="block-header">
-    <h2>File Update</h2>
+    <h2>Google Drive Update</h2>
 </div>
 
-@ViewBag.Message
+<form method="get" action="/drive/indexasync" method="get">
+    <button type="submit" class="btn btn-primary">Click here to update google docs</button>
+</form>
