@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ namespace Hurrah.GoogleDrive.Api.Controllers
     public class FileController : AbpApiController
     {
         [HttpPost]
-        public async Task<dynamic> Test()
+        public async Task<dynamic> Upload()
         {
             try
             {
@@ -29,12 +31,25 @@ namespace Hurrah.GoogleDrive.Api.Controllers
                     .Then(path => new MultipartFormDataStreamProvider(path))
                     .Then( provider => Request.Content.ReadAsMultipartAsync(provider, 209715200));
 
-                string filePath = stream.FileData.First().LocalFileName;
+                string tempFile = stream.FileData.First().LocalFileName;
+                string destFolder = ConfigurationManager.AppSettings["ExcelFolder"];
+                string name = ConfigurationManager.AppSettings["ExcelFile"];
+                string destFile = Path.Combine(destFolder, name);
+                
+                Directory.CreateDirectory(destFolder);
+                Retry.Retry.Do(
+                    () => File.Copy(tempFile, destFile, true), 
+                    TimeSpan.FromSeconds(1),
+                    int.MaxValue
+                );
+                File.Delete(tempFile);
                 
                 return new
                 {
                     Success = true,
-                    FilePath = filePath
+                    FilePath = tempFile,
+                    Destination = destFolder,
+                    Name = name
                 };
             }
             catch (Exception ex)
