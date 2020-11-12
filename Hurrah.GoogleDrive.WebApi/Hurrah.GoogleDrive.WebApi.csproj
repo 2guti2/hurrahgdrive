@@ -262,6 +262,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Controllers\FileController.cs" />
     <Compile Include="Api\GoogleDriveWebApiModule.cs" />
     <Compile Include="Api\Controllers\AccountController.cs" />
     <Compile Include="Api\Models\LoginModel.cs" />

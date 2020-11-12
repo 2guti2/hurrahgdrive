@@ -15,10 +15,10 @@ namespace Hurrah.GoogleDrive.Web.Controllers
     public class DriveController : GoogleDriveControllerBase
     {
         private AuthorizationCodeWebApp.AuthResult _authResult;
-        
+
         public async Task<ActionResult> IndexAsync(CancellationToken cancellationToken)
         {
-            if(_authResult == null)
+            if (_authResult == null)
                 _authResult =
                     await new AuthorizationCodeMvcApp(this, new AppFlowMetadata())
                         .AuthorizeAsync(cancellationToken);
@@ -29,9 +29,9 @@ namespace Hurrah.GoogleDrive.Web.Controllers
                 HttpClientInitializer = _authResult.Credential,
                 ApplicationName = "Hurrah! Google Drive"
             });
-            
+
             const string fileId = "1Xudiwf12N5gN4FhkA7lOlsvYVmxhEwAcyipT4wRH5u8";
-            
+
             ActionResult result = await DownloadFile(fileId, service, cancellationToken);
 
             ViewBag.Message = "File updated successfully";
@@ -43,7 +43,8 @@ namespace Hurrah.GoogleDrive.Web.Controllers
             return View();
         }
 
-        private async Task<ActionResult> DownloadFile(string fileId, DriveService service, CancellationToken cancellationToken)
+        private async Task<ActionResult> DownloadFile(string fileId, DriveService service,
+            CancellationToken cancellationToken)
         {
             const string excelMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
@@ -54,6 +55,7 @@ namespace Hurrah.GoogleDrive.Web.Controllers
             {
                 await excelStream.CopyToAsync(fs);
             }
+
             return View();
         }
     }
