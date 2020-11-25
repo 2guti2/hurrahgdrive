@@ -32,8 +32,8 @@ namespace Hurrah.GoogleDrive.Api.Controllers
                     .Then( provider => Request.Content.ReadAsMultipartAsync(provider, 209715200));
 
                 string tempFile = stream.FileData.First().LocalFileName;
+                string name = stream.FormData["name"];
                 string destFolder = ConfigurationManager.AppSettings["ExcelFolder"];
-                string name = ConfigurationManager.AppSettings["ExcelFile"];
                 string destFile = Path.Combine(destFolder, name);
                 
                 Directory.CreateDirectory(destFolder);
